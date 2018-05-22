@@ -1,0 +1,22 @@
+--- # Outline to playbook translation
+- hosts: remote
+  user: ansible
+  sudo: yes
+  gather_facts: yes
+  tasks:
+  - name: get date/time for when the playbook start
+    raw: /usr/bin/date > /home/ansible/playbook-install-packages-start.log 
+  - name: install httpd
+    yum: pkg=httpd state=latest
+  - name: start httpd service  
+    service: name=httpd state=started
+  - name: Verify httpd service status
+    command: systemctl status httpd
+    register: result
+  - debug: var=result
+  - name: install client softwares elinks
+    yum: pkg=elinks state=latest
+  - name: install client software telnet
+    yum: pkg=telnet state=latest
+  - name: list all packages installed on the system
+    raw: /usr/bin/date > /home/ansible/playbook-install-packages-end.log

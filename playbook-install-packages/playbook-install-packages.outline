@@ -1,0 +1,12 @@
+target group = remote
+user = ansible
+sudo = yes
+start - get date/time for when the playbook start
+do 
+	install httpd
+	start httpd
+        verify httpd status
+	install telnet
+ 	install elinks
+	list all the packages installed on the system
+end - get date/time for when the playbook ends
